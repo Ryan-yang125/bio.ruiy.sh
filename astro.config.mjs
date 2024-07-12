@@ -5,5 +5,6 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), react()]
+  site: process.env.CI ? "https://bio.ruiy.sh" : "http://localhost:4321",
+  integrations: [tailwind(), react()],
 });
