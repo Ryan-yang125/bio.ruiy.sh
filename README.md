@@ -1,5 +1,5 @@
 <h2 align="center">
-  <p>Personal Portfolio</p>
+  <p>Personal portofolio website built with astro</p>
   <a href="https://ruiy.sh/" target="_blank">https://bio.ruiy.sh/</a>
 </h2>
 
