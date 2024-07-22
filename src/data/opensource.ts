@@ -6,7 +6,7 @@ import type { Props as OpenSourceProps } from "../components/opensource/props";
 export const OpenSourceData: OpenSourceProps[] = [
   {
     title: "ChatLLM-Web",
-    url: "https://github.com/Ryan-yang125",
+    url: "https://github.com/Ryan-yang125/ChatLLM-Web",
     description:
       "🗣️ Chat with LLM like Vicuna totally in your browser with WebGPU, safely, privately, and with no server. Powered by web llm.",
     technologies: [

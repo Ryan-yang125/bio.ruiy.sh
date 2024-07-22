@@ -8,8 +8,4 @@ export default defineConfig({
   // site: process.env.CI ? "https://bio.ruiy.sh" : "http://localhost:4321",
   site: "https://bio.ruiy.sh",
   integrations: [tailwind(), react()],
-  output: "server",
-  adapter: vercel({
-    webAnalytics: { enabled: true },
-  }),
 });

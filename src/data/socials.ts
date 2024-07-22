@@ -7,7 +7,7 @@ import IconTwitter from "../components/icons/twitter.astro";
 export const SOCIALS = [
   {
     name: "Github",
-    url: "https://github.com/Ryan-yang125",
+    url: "https://git.new/ruiy",
     icon: IconGithub,
   },
   {
