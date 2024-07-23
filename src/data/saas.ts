@@ -7,7 +7,7 @@ export const SAASDATAS: SaasProps[] = [
   {
     status: "Inactive",
     title: "Fusionote",
-    url: "https://fusionote.pro",
+    url: "https://fusionote.vercel.app",
     screenshotUrl: "/shots/fusionote.png",
     description: `
     One-stop collection, reading, abstracting,retrieval, and management.
