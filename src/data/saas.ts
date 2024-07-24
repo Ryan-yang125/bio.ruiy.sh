@@ -5,6 +5,13 @@ import type { Props as SaasProps } from "../components/saas/props";
 // nestjs-template
 export const SAASDATAS: SaasProps[] = [
   {
+    status: "Active",
+    title: "SearchZero",
+    url: "https://searchzero.pro/",
+    screenshotUrl: "https://searchzero.pro/demo.png",
+    description: `Serach  Engine for  Anything About AI. Stay ahead in AI with SearchZero, Your Go-To Source for the Latest AI Products | News | Companies | Models`,
+  },
+  {
     status: "Inactive",
     title: "Fusionote",
     url: "https://fusionote.vercel.app",
