@@ -6,10 +6,10 @@ import type { Props as SaasProps } from "../components/saas/props";
 export const SAASDATAS: SaasProps[] = [
   {
     status: "Active",
-    title: "SearchZero",
-    url: "https://searchzero.pro/",
+    title: "DiscovAI",
+    url: "https://discovai.io/",
     screenshotUrl: "https://searchzero.pro/demo.png",
-    description: `Serach  Engine for  Anything About AI. Stay ahead in AI with SearchZero, Your Go-To Source for the Latest AI Products | News | Companies | Models`,
+    description: `Search over 15,349 top ai tools in our database by chatgpt, Discover the latest AI Products with detailed traffic data, best match your need`,
   },
   {
     status: "Inactive",
