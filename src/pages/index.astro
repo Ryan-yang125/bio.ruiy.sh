@@ -22,25 +22,46 @@ import Layout from "../layouts/Layout.astro";
           class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24"
         >
           <div
+            class="flex flex-wrap items-center justify-center gap-2 text-xs uppercase tracking-widest text-neutral-500 lg:justify-start"
+          >
+            <button
+              type="button"
+              data-lang-toggle
+              class="rounded-full border border-neutral-300 px-3 py-1 transition hover:border-neutral-500 dark:border-neutral-700 dark:hover:border-neutral-500"
+            >
+              中文
+            </button>
+            <button
+              type="button"
+              data-theme-toggle
+              class="rounded-full border border-neutral-300 px-3 py-1 transition hover:border-neutral-500 dark:border-neutral-700 dark:hover:border-neutral-500"
+            >
+              Dark
+            </button>
+          </div>
+          <div
             class="flex lg:items-start gap-4 flex-col lg:flex-row items-center text-center lg:text-left"
           >
             <!-- <img src="/avatar.png" alt="Ryan Yang" class="w-16 h-16" /> -->
             <div>
               <a
                 href="/"
-                class="text-4xl lg:text-5xl block font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50"
+                class="text-4xl lg:text-5xl block font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-500 dark:from-neutral-50 dark:to-neutral-400 bg-opacity-50"
               >
                 <h1>Ryan Yang</h1>
               </a>
-              <h2 class="mt-2 text-sm lg:text-lg font-medium text-neutral-400">
+              <h2
+                class="mt-2 text-sm lg:text-lg font-medium text-neutral-600 dark:text-neutral-400"
+                data-i18n-key="role"
+              >
                 FullStack Engineer
               </h2>
               <a
                 data-ccursor
                 href="https://x.com/ruiyang25"
-                class="inline-flex transition-all border-neutral-700 hover:border-opacity-0 border-opacity-50 shadow rounded-md border backdrop-blur-xl bg-neutral-400/10 px-3 py-2.5 items-center text-white font-semibold group p-2 text-sm gap-x-2 mt-4"
+                class="inline-flex transition-all border-neutral-300 hover:border-opacity-0 border-opacity-50 shadow rounded-md border backdrop-blur-xl bg-neutral-900/10 px-3 py-2.5 items-center text-neutral-900 dark:border-neutral-700 dark:bg-neutral-400/10 dark:text-white font-semibold group p-2 text-sm gap-x-2 mt-4"
               >
-                <span>Let's Connect</span>
+                <span data-i18n-key="connect">Let's Connect</span>
                 <sapn
                   class="w-2 h-2 rounded-full bg-green-400 duration-1000 animate-pulse"
                 ></sapn>
@@ -56,25 +77,28 @@ import Layout from "../layouts/Layout.astro";
             id="about"
             class="mt-4 mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
             aria-label="About me"
+            data-i18n-attr="aria-label"
+            data-i18n-key="aboutAria"
           >
             <div
               class="sticky top-0 z-20 -mx-6 mb-4 w-screen px-6 py-3 backdrop-blur-lg md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0"
             >
               <h2
-                class="text-sm font-bold uppercase tracking-widest text-neutral-200 lg:sr-only"
+                class="text-sm font-bold uppercase tracking-widest text-neutral-700 dark:text-neutral-200 lg:sr-only"
+                data-i18n-key="about"
               >
                 About
               </h2>
             </div>
             <div>
               <div class="mb-4 space-y-4">
-                <p>
+                <p data-i18n-key="aboutLineOne">
                   I'm Ryan Yang, a software developer, and the proud dad of two
                   adorable cats. I have a strong focus on artificial
                   intelligence and micro SaaS tools. I love building beautiful
                   UIs and creating interesting apps.
                 </p>
-                <p>
+                <p data-i18n-key="aboutLineTwo">
                   I'm passionate about new technology and always on the lookout
                   for great opportunities!
                 </p>
@@ -90,7 +114,7 @@ import Layout from "../layouts/Layout.astro";
                 {SOCIALS.map((social) => (
                   <li class="text-xs p-2 rounded" data-ccursor>
                     <a
-                      class="block hover:text-slate-200"
+                      class="block hover:text-neutral-900 dark:hover:text-slate-200"
                       href={social.url}
                       target="_blank"
                       rel="noreferrer noopener"
@@ -112,12 +136,15 @@ import Layout from "../layouts/Layout.astro";
             id="saas"
             class="mb-16 scroll-mt-16 md:mb-24 lg:mb-24 lg:scroll-mt-16"
             aria-label="Work Projects"
+            data-i18n-attr="aria-label"
+            data-i18n-key="saasAria"
           >
             <div
               class="sticky top-0 z-20 -mx-6 mb-4 w-screen px-6 py-3 backdrop-blur-lg md:-mx-12 md:px-12"
             >
               <h2
-                class="text-sm font-bold uppercase tracking-widest text-neutral-200"
+                class="text-sm font-bold uppercase tracking-widest text-neutral-700 dark:text-neutral-200"
+                data-i18n-key="saasTitle"
               >
                 Saas Projects
               </h2>
@@ -132,12 +159,15 @@ import Layout from "../layouts/Layout.astro";
             id="opensource"
             class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
             aria-label="Work Projects"
+            data-i18n-attr="aria-label"
+            data-i18n-key="openSourceAria"
           >
             <div
               class="sticky top-0 z-20 -mx-6 mb-4 w-screen px-6 py-3 backdrop-blur-lg md:-mx-12 md:px-12"
             >
               <h2
-                class="text-sm font-bold uppercase tracking-widest text-neutral-200"
+                class="text-sm font-bold uppercase tracking-widest text-neutral-700 dark:text-neutral-200"
+                data-i18n-key="openSourceTitle"
               >
                 Open Source Projects
               </h2>
@@ -153,8 +183,9 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </div>
 
-  <footer class="text-center py-4 text-xs">
-    {new Date().getFullYear()} All rights reserved.
+  <footer class="text-center py-4 text-xs text-neutral-500 dark:text-neutral-400">
+    <span>{new Date().getFullYear()}</span>
+    <span data-i18n-key="rights"> All rights reserved.</span>
   </footer>
 </Layout>
 
