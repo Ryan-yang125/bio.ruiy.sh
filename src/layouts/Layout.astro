@@ -11,13 +11,13 @@ const { title, description } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <HeaderSEO title={title} description={description} />
   </head>
 
   <body
-    class="bg-black leading-relaxed text-neutral-200 tracking-wide antialiased selection:bg-neutral-300 selection:text-neutral-900 z-10 relative"
+    class="bg-neutral-50 leading-relaxed text-neutral-900 tracking-wide antialiased selection:bg-neutral-300 selection:text-neutral-900 z-10 relative dark:bg-black dark:text-neutral-200"
   >
     <SparklesCore
       client:idle
@@ -41,6 +41,14 @@ const { title, description } = Astro.props;
         font-family: system-ui, sans-serif;
         background-size: 224px;
         font-size: 1.125rem;
+      }
+
+      html[data-theme="dark"] .light-only {
+        display: none;
+      }
+
+      html[data-theme="light"] .dark-only {
+        display: none;
       }
     </style>
   </body>
