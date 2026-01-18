@@ -25,6 +25,6 @@ export const SAASDATAS: SaasProps[] = [
     title: "Headlines-AI",
     url: "https://headlines-ai.com/",
     screenshotUrl: "/shots/headlines-ai.png",
-    description: `Get everyday headlines news in 5 minutes powered by our AI summarized stories.`,
+    description: `Get everyday's headlines news in 5 minutes powered by our AI summarized stories.`,
   },
 ];
