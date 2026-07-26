@@ -16,4 +16,4 @@ pnpm build
 pnpm preview
 ```
 
-The static `dist/` output is deployed to Cloudflare Pages at [bio.ruiy.sh](https://bio.ruiy.sh).
+The static `dist/` output is deployed to Cloudflare Pages at [ruiy.pages.dev](https://ruiy.pages.dev).
