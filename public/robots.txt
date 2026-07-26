@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bio.ruiy.sh/sitemap.xml
+Sitemap: https://ruiy.pages.dev/sitemap.xml
