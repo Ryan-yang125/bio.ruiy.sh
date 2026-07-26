@@ -1,8 +1,19 @@
-<h2 align="center">
-  <p>Personal portofolio website built with astro</p>
-  <a href="https://ruiy.sh/" target="_blank">https://bio.ruiy.sh/</a>
-</h2>
+# Ryan Yang — Field Notes
 
-<div align="center">
-  <img alt="Demo" src="./demo/demo.jpeg" />
-</div>
+Ryan Yang's interactive personal site: current work, selected projects, public activity, and an embedded command line.
+
+## Local development
+
+```bash
+pnpm install
+pnpm dev
+```
+
+## Production build
+
+```bash
+pnpm build
+pnpm preview
+```
+
+The static `dist/` output is deployed to Cloudflare Pages at [bio.ruiy.sh](https://bio.ruiy.sh).

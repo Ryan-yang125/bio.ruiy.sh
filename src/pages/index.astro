@@ -1,215 +1,1159 @@
 ---
-import Component from "../components/Component.astro";
-import { SAASDATAS } from "../data/saas";
-import Saas from "../components/saas/index.astro";
-import { OpenSourceData } from "../data/opensource";
-import OpenSource from "../components/opensource/index.astro";
+import ActivityFeed from "../components/ActivityFeed";
+import Clock from "../components/Clock";
+import MotionController from "../components/MotionController";
+import Terminal from "../components/Terminal";
 
-import { SOCIALS } from "../data/socials";
-import Layout from "../layouts/Layout.astro";
+const title = "Ryan Yang — Field Notes";
+const description =
+  "Independent AI product developer in Shanghai building small systems that help AI work land.";
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://bio.ruiy.sh/#ryan",
+      name: "Ryan Yang",
+      url: "https://bio.ruiy.sh",
+      image: "https://bio.ruiy.sh/avatar.webp",
+      jobTitle: "Independent AI Product Developer",
+      homeLocation: { "@type": "Place", name: "Shanghai, China" },
+      sameAs: [
+        "https://github.com/Ryan-yang125",
+        "https://x.com/ruiyanghim",
+        "https://image2studio.com",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://bio.ruiy.sh/#website",
+      url: "https://bio.ruiy.sh",
+      name: "Ryan Yang — Field Notes",
+      description,
+      author: { "@id": "https://bio.ruiy.sh/#ryan" },
+    },
+  ],
+};
 ---
 
-<Layout
-  title="Ryan Yang Portfolio"
-  description="Ryan Yang - Full Stack Developer - Portfolio, Projects, Codes, About Me, Contact, Experience, Study, Saas, Landing"
->
-  <div class="relative hero z-10">
-    <div
-      class="mx-auto min-h-screen max-w-screen-2xl px-6 py-12 font-sans md:px-12 md:py-20 lg:px-24 lg:py-0"
-    >
-      <div class="lg:flex lg:justify-between lg:gap-36">
-        <header
-          class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24"
-        >
-          <div
-            class="flex flex-wrap items-center justify-center gap-2 text-xs uppercase tracking-widest text-neutral-500 lg:justify-start"
-          >
-            <button
-              type="button"
-              data-lang-toggle
-              class="rounded-full border border-neutral-300 px-3 py-1 transition hover:border-neutral-500 dark:border-neutral-700 dark:hover:border-neutral-500"
-            >
-              中文
-            </button>
-            <button
-              type="button"
-              data-theme-toggle
-              class="rounded-full border border-neutral-300 px-3 py-1 transition hover:border-neutral-500 dark:border-neutral-700 dark:hover:border-neutral-500"
-            >
-              Dark
-            </button>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#111614" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://bio.ruiy.sh/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ryan Yang's Field Notes" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@ruiyanghim" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://bio.ruiy.sh/og.png" />
+    <title>{title}</title>
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(structuredData)}
+    />
+    <style is:global>
+      :root {
+        --bg: #111614;
+        --panel: #181f1c;
+        --panel2: #202925;
+        --ink: #e6ede7;
+        --muted: #8b9a91;
+        --line: #303d36;
+        --mint: #69f0ae;
+        --peach: #ffad7c;
+        --lav: #c6b9ff;
+        --pad: clamp(18px, 4vw, 54px);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        color-scheme: dark;
+        background: var(--bg);
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family:
+          Inter,
+          ui-sans-serif,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+      }
+      a,
+      button,
+      input {
+        -webkit-tap-highlight-color: rgba(105, 240, 174, 0.16);
+        touch-action: manipulation;
+      }
+      a:focus-visible,
+      button:focus-visible,
+      input:focus-visible {
+        outline: 2px solid var(--mint);
+        outline-offset: 3px;
+      }
+      .skip-link {
+        position: fixed;
+        z-index: 100;
+        top: 10px;
+        left: 10px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        background: var(--mint);
+        color: var(--bg);
+        font:
+          600 12px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        transform: translateY(-150%);
+        transition: transform 160ms ease-out;
+      }
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+      .shell {
+        max-width: 1500px;
+        margin: auto;
+        padding: max(18px, env(safe-area-inset-top))
+          max(18px, env(safe-area-inset-right))
+          max(18px, env(safe-area-inset-bottom))
+          max(18px, env(safe-area-inset-left));
+      }
+      .top {
+        height: 52px;
+        border: 1px solid var(--line);
+        border-radius: 13px 13px 0 0;
+        background: var(--panel);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 17px;
+        font:
+          400 10px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: var(--muted);
+        position: sticky;
+        top: 0;
+        z-index: 30;
+      }
+      .dots {
+        display: flex;
+        gap: 7px;
+      }
+      .dots i {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #526058;
+      }
+      .dots i:first-child {
+        background: var(--peach);
+      }
+      .top strong {
+        font-weight: 400;
+        color: var(--ink);
+      }
+      .clock {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-variant-numeric: tabular-nums;
+      }
+      .clock i {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--mint);
+        box-shadow: 0 0 0 4px rgba(105, 240, 174, 0.09);
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: 270px minmax(0, 1fr);
+        border-inline: 1px solid var(--line);
+      }
+      .side {
+        border-right: 1px solid var(--line);
+        padding: 28px 22px;
+        position: sticky;
+        top: 52px;
+        height: calc(100svh - 70px);
+        display: flex;
+        flex-direction: column;
+        background: #131916;
+      }
+      .avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+        object-fit: cover;
+        filter: grayscale(0.25);
+        margin-bottom: 18px;
+      }
+      .side h1 {
+        font-size: 22px;
+        margin: 0 0 6px;
+      }
+      .handle {
+        font:
+          400 11px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: var(--mint);
+      }
+      .bio {
+        font-size: 14px;
+        line-height: 1.55;
+        color: #b0bcb5;
+        margin: 18px 0 25px;
+      }
+      .menu {
+        display: grid;
+        gap: 7px;
+      }
+      .menu a {
+        padding: 9px 10px;
+        border-radius: 7px;
+        text-decoration: none;
+        font:
+          400 11px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: #aab6af;
+      }
+      .menu a:hover,
+      .menu a.active {
+        background: var(--panel2);
+        color: var(--ink);
+      }
+      .side-foot {
+        margin-top: auto;
+        font:
+          400 10px/1.7 ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: var(--muted);
+      }
+      .side-foot i {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--mint);
+        margin-right: 7px;
+      }
+      .content {
+        min-width: 0;
+      }
+      .hero {
+        min-height: 670px;
+        padding: clamp(45px, 7vw, 95px) var(--pad);
+        border-bottom: 1px solid var(--line);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+      }
+      .stamp {
+        font:
+          400 10px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: var(--muted);
+      }
+      .hero h2 {
+        font-size: clamp(48px, 8vw, 116px);
+        line-height: 0.9;
+        letter-spacing: -0.065em;
+        margin: 35px 0;
+        max-width: 960px;
+        text-wrap: balance;
+      }
+      .hero h2 span {
+        color: var(--mint);
+      }
+      .hero-intro {
+        font-size: clamp(18px, 2vw, 25px);
+        line-height: 1.5;
+        max-width: 680px;
+        color: #b9c5be;
+      }
+      .command {
+        margin-top: 50px;
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        background: #0c100e;
+        max-width: 760px;
+        box-shadow: 0 20px 70px rgba(0, 0, 0, 0.28);
+      }
+      .command-head {
+        height: 35px;
+        border-bottom: 1px solid var(--line);
+        padding: 10px 13px;
+        font:
+          400 9px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: var(--muted);
+      }
+      .command-body {
+        padding: 18px;
+        font:
+          400 12px/1.9 ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+      }
+      .terminal-history {
+        max-height: 180px;
+        overflow: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--line) transparent;
+      }
+      .terminal-line {
+        display: flex;
+        align-items: flex-start;
+        gap: 7px;
+      }
+      .terminal-line.system {
+        padding-left: 18px;
+        color: #829087;
+      }
+      .terminal-line.error {
+        padding-left: 18px;
+        color: var(--peach);
+      }
+      .terminal-form {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        margin-top: 2px;
+      }
+      .terminal-input {
+        flex: 1;
+        min-width: 0;
+        min-height: 28px;
+        border: 0;
+        outline: 0;
+        padding: 0;
+        background: transparent;
+        color: var(--ink);
+        caret-color: var(--mint);
+        font: inherit;
+      }
+      .terminal-input::placeholder {
+        color: #526058;
+      }
+      .command-suggestions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 13px;
+        padding-top: 12px;
+        border-top: 1px solid #202a25;
+      }
+      .command-suggestions button {
+        min-height: 28px;
+        border: 1px solid #2c3832;
+        border-radius: 5px;
+        padding: 5px 8px;
+        background: transparent;
+        color: #718078;
+        cursor: pointer;
+        font:
+          400 9px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+      }
+      .command-suggestions button:hover,
+      .command-suggestions button:focus-visible {
+        border-color: var(--mint);
+        color: var(--mint);
+        outline: 0;
+      }
+      .prompt {
+        color: var(--mint);
+      }
+      .cursor {
+        display: inline-block;
+        width: 8px;
+        height: 14px;
+        background: var(--mint);
+        vertical-align: -2px;
+        animation: blink 1s steps(1) infinite;
+      }
+      .output {
+        color: #829087;
+      }
+      .floating-note {
+        position: absolute;
+        right: 5%;
+        top: 17%;
+        border: 1px solid var(--lav);
+        color: var(--lav);
+        padding: 10px 13px;
+        transform: rotate(3deg);
+        font:
+          400 10px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+      }
+      .block {
+        padding: 90px var(--pad);
+        border-bottom: 1px solid var(--line);
+      }
+      .heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 30px;
+        margin-bottom: 45px;
+      }
+      .heading h3 {
+        font-size: clamp(35px, 5vw, 64px);
+        letter-spacing: -0.04em;
+        margin: 0;
+        text-wrap: balance;
+      }
+      .heading p {
+        font:
+          400 11px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: var(--muted);
+        max-width: 300px;
+        line-height: 1.6;
+      }
+      .now-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 16px;
+      }
+      .note {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--panel);
+        padding: 25px;
+        min-height: 230px;
+      }
+      .note small {
+        font:
+          400 10px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: var(--mint);
+      }
+      .note h4 {
+        font-size: 27px;
+        letter-spacing: -0.03em;
+        margin: 28px 0 12px;
+      }
+      .note p {
+        color: #a9b5ae;
+        line-height: 1.55;
+      }
+      .note ul {
+        list-style: none;
+        padding: 0;
+        margin: 25px 0 0;
+      }
+      .note li {
+        padding: 10px 0;
+        border-top: 1px solid var(--line);
+        font:
+          400 11px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+      }
+      .note li:before {
+        content: "↳ ";
+        color: var(--peach);
+      }
+      .projects {
+        display: grid;
+        gap: 1px;
+        background: var(--line);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .project {
+        background: var(--panel);
+        padding: 25px;
+        display: grid;
+        grid-template-columns: 1fr 170px;
+        gap: 20px;
+        text-decoration: none;
+        transition: background-color 160ms var(--ease-out);
+      }
+      .project:hover {
+        background: var(--panel2);
+      }
+      .project small {
+        font:
+          400 9px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: var(--muted);
+      }
+      .project h4 {
+        font-size: 27px;
+        margin: 9px 0;
+      }
+      .project p {
+        margin: 0;
+        color: #a9b5ae;
+        line-height: 1.5;
+        max-width: 630px;
+      }
+      .project aside {
+        text-align: right;
+        align-self: center;
+        font:
+          400 10px/1.8 ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: var(--muted);
+      }
+      .project aside b {
+        display: block;
+        font-size: 20px;
+        color: var(--mint);
+        font-weight: 400;
+      }
+      .activity-grid {
+        display: grid;
+        grid-template-columns: 1.35fr 0.65fr;
+        gap: 16px;
+      }
+      .activity-feed,
+      .activity-card {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--panel);
+      }
+      .activity-feed {
+        overflow: hidden;
+      }
+      .activity-item {
+        display: grid;
+        grid-template-columns: 10px 1fr auto;
+        gap: 13px;
+        align-items: start;
+        padding: 18px 20px;
+        border-bottom: 1px solid var(--line);
+        text-decoration: none;
+      }
+      .activity-item:last-child {
+        border-bottom: 0;
+      }
+      .activity-item:hover {
+        background: var(--panel2);
+      }
+      .activity-dot {
+        width: 7px;
+        height: 7px;
+        margin-top: 6px;
+        border-radius: 50%;
+        background: var(--mint);
+      }
+      .activity-copy strong {
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .activity-copy span,
+      .activity-time {
+        font:
+          400 10px/1.6 ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: var(--muted);
+      }
+      .activity-time {
+        text-align: right;
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+      }
+      .activity-card {
+        padding: 22px;
+        display: flex;
+        min-height: 240px;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .activity-card small {
+        font:
+          400 9px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: var(--mint);
+      }
+      .activity-card strong {
+        display: block;
+        font-size: 40px;
+        letter-spacing: -0.05em;
+      }
+      .activity-card p {
+        margin: 7px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .activity-state {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font:
+          400 9px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: var(--muted);
+      }
+      .activity-state i {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--mint);
+      }
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      .timeline {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+      }
+      .year {
+        border-top: 1px solid var(--line);
+        padding: 21px 0;
+        font:
+          400 11px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: var(--mint);
+      }
+      .event {
+        border-top: 1px solid var(--line);
+        padding: 18px 0;
+      }
+      .event strong {
+        font-size: 17px;
+        font-weight: 500;
+      }
+      .event p {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .personal {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+      }
+      .personal article {
+        min-height: 180px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 22px;
+        background: var(--panel);
+      }
+      .personal small {
+        font:
+          400 9px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: var(--peach);
+      }
+      .personal h4 {
+        font-size: 22px;
+        margin: 28px 0 8px;
+      }
+      .personal p {
+        color: var(--muted);
+        line-height: 1.5;
+        margin: 0;
+      }
+      .contact {
+        padding: 100px var(--pad);
+        text-align: center;
+      }
+      .contact h3 {
+        font-size: clamp(44px, 7vw, 90px);
+        letter-spacing: -0.055em;
+        margin: 0 0 35px;
+        text-wrap: balance;
+      }
+      .contact h3 span {
+        color: var(--peach);
+      }
+      .links {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .button {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px 16px;
+        text-decoration: none;
+        font:
+          400 10px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+      }
+      .button:hover {
+        border-color: var(--mint);
+        color: var(--mint);
+      }
+      section[id],
+      main[id] {
+        scroll-margin-top: 72px;
+      }
+      .footer {
+        border: 1px solid var(--line);
+        border-radius: 0 0 13px 13px;
+        padding: 18px;
+        display: flex;
+        justify-content: space-between;
+        font:
+          400 9px ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: var(--muted);
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(15px);
+        transition:
+          opacity 550ms var(--ease-out),
+          transform 550ms var(--ease-out);
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+      @media (max-width: 850px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .side {
+          position: relative;
+          top: auto;
+          height: auto;
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+          display: grid;
+          grid-template-columns: 72px 1fr;
+          gap: 18px;
+        }
+        .side .avatar {
+          grid-row: 1/4;
+        }
+        .menu {
+          display: flex;
+          flex-wrap: wrap;
+          grid-column: 1/-1;
+        }
+        .side-foot {
+          display: none;
+        }
+        .now-grid {
+          grid-template-columns: 1fr;
+        }
+        .activity-grid {
+          grid-template-columns: 1fr;
+        }
+        .personal {
+          grid-template-columns: 1fr;
+        }
+        .floating-note {
+          display: none;
+        }
+      }
+      @media (max-width: 520px) {
+        .shell {
+          padding: max(8px, env(safe-area-inset-top))
+            max(8px, env(safe-area-inset-right))
+            max(8px, env(safe-area-inset-bottom))
+            max(8px, env(safe-area-inset-left));
+        }
+        .top span:last-child {
+          display: none;
+        }
+        .project {
+          grid-template-columns: 1fr;
+        }
+        .project aside {
+          text-align: left;
+        }
+        .timeline {
+          grid-template-columns: 70px 1fr;
+        }
+        .hero {
+          padding-inline: 20px;
+        }
+        .block,
+        .contact {
+          padding-inline: 20px;
+        }
+        .hero h2 {
+          font-size: 52px;
+        }
+        .footer {
+          display: block;
+          line-height: 2;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .cursor {
+          animation: none;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      :root {
+        --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .project {
+        transition: background-color 160ms var(--ease-out);
+      }
+      .scroll-progress {
+        position: fixed;
+        inset: 0 0 auto 0;
+        height: 2px;
+        background: var(--mint);
+        transform: scaleX(0);
+        transform-origin: left center;
+        z-index: 80;
+        will-change: transform;
+      }
+      .gsap-ready .reveal {
+        opacity: 1;
+        transform: none;
+      }
+      .command {
+        transform-style: preserve-3d;
+        will-change: transform;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#top">Skip to main content</a>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="shell">
+      <header class="top">
+        <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+        <strong>ryan.yang / field-notes</strong><Clock client:load />
+      </header>
+      <div class="layout">
+        <aside class="side">
+          <img
+            class="avatar"
+            src="/avatar.webp"
+            alt="Portrait of Ryan Yang"
+            width="400"
+            height="400"
+            fetchpriority="high"
+            decoding="async"
+          />
+          <div>
+            <h1>Ryan Yang</h1>
+            <span class="handle">@Ryan-yang125</span>
+            <p class="bio">
+              Independent AI product developer. Building the last mile of AI
+              work.
+            </p>
           </div>
-          <div
-            class="flex lg:items-start gap-4 flex-col lg:flex-row items-center text-center lg:text-left"
-          >
-            <!-- <img src="/avatar.png" alt="Ryan Yang" class="w-16 h-16" /> -->
-            <div>
-              <a
-                href="/"
-                class="text-4xl lg:text-5xl block font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-neutral-900 to-neutral-500 dark:from-neutral-50 dark:to-neutral-400 bg-opacity-50"
-              >
-                <h1>Ryan Yang</h1>
-              </a>
-              <h2
-                class="mt-2 text-sm lg:text-lg font-medium text-neutral-600 dark:text-neutral-400"
-                data-i18n-key="role"
-              >
-                FullStack Engineer
-              </h2>
-              <a
-                data-ccursor
-                href="https://x.com/ruiyang25"
-                class="inline-flex transition-all border-neutral-300 hover:border-opacity-0 border-opacity-50 shadow rounded-md border backdrop-blur-xl bg-neutral-900/10 px-3 py-2.5 items-center text-neutral-900 dark:border-neutral-700 dark:bg-neutral-400/10 dark:text-white font-semibold group p-2 text-sm gap-x-2 mt-4"
-              >
-                <span data-i18n-key="connect">Let's Connect</span>
-                <sapn
-                  class="w-2 h-2 rounded-full bg-green-400 duration-1000 animate-pulse"
-                ></sapn>
-              </a>
-            </div>
-            <img
-              src="/avatar.webp"
-              alt="Ryan Yang"
-              class="w-16 h-16 rounded-full"
-            />
+          <nav class="menu" aria-label="Primary navigation">
+            <a class="active" href="#top">/ home</a><a href="#now">/ now</a><a
+              href="#projects">/ projects</a
+            ><a href="#activity">/ activity</a><a href="#path">/ path</a><a
+              href="#offscreen">/ off-screen</a
+            ><a href="#contact">/ contact</a>
+          </nav>
+          <div class="side-foot">
+            <p><i></i>ONLINE · BUILDING</p>
+            <p>66 PUBLIC REPOS<br />630★ TOP PROJECT<br />GITHUB SINCE 2019</p>
           </div>
-          <section
-            id="about"
-            class="mt-4 mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
-            aria-label="About me"
-            data-i18n-attr="aria-label"
-            data-i18n-key="aboutAria"
-          >
-            <div
-              class="sticky top-0 z-20 -mx-6 mb-4 w-screen px-6 py-3 backdrop-blur-lg md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0"
-            >
-              <h2
-                class="text-sm font-bold uppercase tracking-widest text-neutral-700 dark:text-neutral-200 lg:sr-only"
-                data-i18n-key="about"
-              >
-                About
-              </h2>
-            </div>
+        </aside>
+        <main class="content" id="top">
+          <section class="hero">
+            <span class="stamp">FIELD NOTE 026 · UPDATED JULY 2026</span>
             <div>
-              <div class="mb-4 space-y-4">
-                <p data-i18n-key="aboutLineOne">
-                  I'm Ryan Yang, a software developer, and the proud dad of two
-                  adorable cats. I have a strong focus on artificial
-                  intelligence and micro SaaS tools. I love building beautiful
-                  UIs and creating interesting apps.
+              <h2>
+                I build small<br />systems that help<br />AI work
+                <span>land.</span>
+              </h2>
+              <p class="hero-intro">
+                Hello, I’m Ryan—a developer in Shanghai exploring AI products,
+                open-source tools, image-making, and the craft of shipping.
+              </p>
+              <Terminal client:load />
+            </div>
+            <span class="floating-note">HUMAN BEHIND<br />THE TERMINAL ↙</span>
+          </section>
+          <section class="block" id="now">
+            <div class="heading reveal">
+              <h3>Now</h3>
+              <p>A small snapshot of what has my attention this month.</p>
+            </div>
+            <div class="now-grid">
+              <article class="note reveal">
+                <small>CURRENTLY BUILDING</small>
+                <h4>Image2Studio</h4>
+                <p>
+                  Turning visual prompting into reusable production scenes for
+                  real creative work.
                 </p>
-                <p data-i18n-key="aboutLineTwo">
-                  I'm passionate about new technology and always on the lookout
-                  for great opportunities!
+                <ul>
+                  <li>Expanding the GPT Image 2 prompt library</li>
+                  <li>Making outputs easier to discover and reuse</li>
+                  <li>Writing down what works</li>
+                </ul>
+              </article>
+              <article class="note reveal">
+                <small>CURRENTLY THINKING ABOUT</small>
+                <h4>Proof after generation</h4>
+                <p>
+                  AI makes creating fast. The interesting work now lives in
+                  publishing, checking, and turning repeated actions into
+                  durable tools.
+                </p>
+              </article>
+            </div>
+          </section>
+          <section class="block" id="projects">
+            <div class="heading reveal">
+              <h3>Selected projects</h3>
+              <p>Products and tools that each mark a part of my path.</p>
+            </div>
+            <div class="projects reveal">
+              <a
+                class="project"
+                href="https://image2studio.com"
+                target="_blank"
+                rel="noreferrer"
+                ><div>
+                  <small>01 · CURRENT PRODUCT</small>
+                  <h4>Image2Studio</h4>
+                  <p>
+                    Production-ready image scenes and a growing GPT Image 2
+                    prompt library.
+                  </p>
+                </div>
+                <aside><b>LIVE ↗</b>IMAGE MAKING</aside></a
+              ><a
+                class="project"
+                href="https://github.com/Ryan-yang125/ChatLLM-Web"
+                target="_blank"
+                rel="noreferrer"
+                ><div>
+                  <small>02 · OPEN SOURCE ORIGIN</small>
+                  <h4>ChatLLM-Web</h4>
+                  <p>
+                    Private LLM inference entirely in the browser, powered by
+                    WebGPU.
+                  </p>
+                </div>
+                <aside><b>630★ ↗</b>JAVASCRIPT</aside></a
+              ><a
+                class="project"
+                href="https://github.com/Ryan-yang125/drophere"
+                target="_blank"
+                rel="noreferrer"
+                ><div>
+                  <small>03 · PERSONAL TOOL</small>
+                  <h4>DropHere</h4>
+                  <p>
+                    Publish a static site from an agent session with one obvious
+                    command.
+                  </p>
+                </div>
+                <aside><b>CODE ↗</b>TYPESCRIPT</aside></a
+              ><a
+                class="project"
+                href="https://github.com/Ryan-yang125/checkhere"
+                target="_blank"
+                rel="noreferrer"
+                ><div>
+                  <small>04 · RELEASE TOOL</small>
+                  <h4>CheckHere</h4>
+                  <p>
+                    Browser checks and focused feedback for AI-built websites.
+                  </p>
+                </div>
+                <aside><b>CODE ↗</b>VERIFICATION</aside></a
+              >
+            </div>
+          </section>
+          <section class="block" id="activity">
+            <div class="heading reveal">
+              <h3>Public activity</h3>
+              <p>A live window into the code I have been touching recently.</p>
+            </div>
+            <ActivityFeed client:visible />
+          </section>
+          <section class="block" id="path">
+            <div class="heading reveal">
+              <h3>My path</h3>
+              <p>A few commits that changed the direction.</p>
+            </div>
+            <div class="timeline reveal">
+              <div class="year">2019</div>
+              <div class="event">
+                <strong>Started publishing code</strong>
+                <p>Graphics, C++, OpenGL, and university experiments.</p>
+              </div>
+              <div class="year">2023</div>
+              <div class="event">
+                <strong>Moved AI into the browser</strong>
+                <p>
+                  ChatLLM-Web became the first project to reach hundreds of
+                  developers.
+                </p>
+              </div>
+              <div class="year">2025</div>
+              <div class="event">
+                <strong>Started building with agents</strong>
+                <p>
+                  Repeated workflows began turning into tools and reusable
+                  skills.
+                </p>
+              </div>
+              <div class="year">NOW</div>
+              <div class="event">
+                <strong>Independent AI product developer</strong>
+                <p>
+                  Creating products, publishing them, and sharing the systems
+                  behind the work.
                 </p>
               </div>
             </div>
           </section>
-          {
-            SOCIALS.length && (
-              <ul
-                class="mt-8 flex items-center justify-center lg:justify-normal gap-x-5"
-                aria-label="Social media"
-              >
-                {SOCIALS.map((social) => (
-                  <li class="text-xs p-2 rounded" data-ccursor>
-                    <a
-                      class="block hover:text-neutral-900 dark:hover:text-slate-200"
-                      href={social.url}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      aria-label={`${social.name} (opens in a new tab)`}
-                    >
-                      <span class="sr-only">{social.name}</span>
-                      {<Component component={social.icon} />}
-                      <sapn class="w-2 h-2 rounded-full bg-green-400 duration-1000 animate-pulse" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )
-          }
-        </header>
-
-        <main id="content" class="pt-24 lg:w-1/2 lg:py-24">
-          <section
-            id="saas"
-            class="mb-16 scroll-mt-16 md:mb-24 lg:mb-24 lg:scroll-mt-16"
-            aria-label="Work Projects"
-            data-i18n-attr="aria-label"
-            data-i18n-key="saasAria"
-          >
-            <div
-              class="sticky top-0 z-20 -mx-6 mb-4 w-screen px-6 py-3 backdrop-blur-lg md:-mx-12 md:px-12"
-            >
-              <h2
-                class="text-sm font-bold uppercase tracking-widest text-neutral-700 dark:text-neutral-200"
-                data-i18n-key="saasTitle"
-              >
-                Saas Projects
-              </h2>
+          <section class="block" id="offscreen">
+            <div class="heading reveal">
+              <h3>Off-screen</h3>
+              <p>The person continues after the code editor closes.</p>
             </div>
-            <div class="flex flex-col gap-16">
-              <ol class="group/list space-y-12">
-                {SAASDATAS.map((saas) => <Saas {...saas} />)}
-              </ol>
+            <div class="personal">
+              <article class="reveal">
+                <small>VISUAL OBSESSION</small>
+                <h4>Motion & graphics</h4>
+                <p>
+                  I collect interaction details and enjoy understanding why
+                  movement feels right.
+                </p>
+              </article>
+              <article class="reveal">
+                <small>LEARNING MODE</small>
+                <h4>Build to understand</h4>
+                <p>
+                  I prefer a working artifact, a public URL, and lessons earned
+                  through use.
+                </p>
+              </article>
+              <article class="reveal">
+                <small>HOME BASE</small>
+                <h4>Shanghai</h4>
+                <p>
+                  Working in UTC+8, following ideas wherever the internet
+                  carries them.
+                </p>
+              </article>
             </div>
           </section>
-          <section
-            id="opensource"
-            class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
-            aria-label="Work Projects"
-            data-i18n-attr="aria-label"
-            data-i18n-key="openSourceAria"
-          >
-            <div
-              class="sticky top-0 z-20 -mx-6 mb-4 w-screen px-6 py-3 backdrop-blur-lg md:-mx-12 md:px-12"
-            >
-              <h2
-                class="text-sm font-bold uppercase tracking-widest text-neutral-700 dark:text-neutral-200"
-                data-i18n-key="openSourceTitle"
+          <section class="contact" id="contact">
+            <h3 class="reveal">
+              Want to compare notes<br />or make something <span>useful?</span>
+            </h3>
+            <div class="links">
+              <a class="button" href="mailto:ruiyang0012@gmail.com">EMAIL ↗</a
+              ><a
+                class="button"
+                href="https://x.com/ruiyanghim"
+                target="_blank"
+                rel="noreferrer">X / TWITTER ↗</a
+              ><a
+                class="button"
+                href="https://github.com/Ryan-yang125"
+                target="_blank"
+                rel="noreferrer">GITHUB ↗</a
               >
-                Open Source Projects
-              </h2>
-            </div>
-            <div class="flex flex-col gap-16">
-              <ol class="group/list space-y-12">
-                {OpenSourceData.map((saas) => <OpenSource {...saas} />)}
-              </ol>
             </div>
           </section>
         </main>
       </div>
+      <footer class="footer">
+        <span>© 2026 RYAN YANG</span><span>LAST HUMAN EDIT: JULY 2026</span>
+      </footer>
     </div>
-  </div>
-
-  <footer class="text-center py-4 text-xs text-neutral-500 dark:text-neutral-400">
-    <span>{new Date().getFullYear()}</span>
-    <span data-i18n-key="rights"> All rights reserved.</span>
-  </footer>
-</Layout>
-
-<style scoped>
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  .hero {
-    background-image: url(/pattern.svg);
-    background-position: top center;
-    background-repeat: no-repeat;
-    overflow-y: visible;
-    overflow-x: clip;
-  }
-
-  /*
-  .hero {
-    animation: fadeIn 3s;
-  }
-   */
-</style>
+    <MotionController client:load />
+  </body>
+</html>
