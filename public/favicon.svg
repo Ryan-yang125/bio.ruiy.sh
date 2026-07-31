@@ -1,4 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="15" fill="#111614"/>
-  <path d="M17 18h17c9 0 14 5 14 12 0 5-3 9-8 11l9 10H37l-7-9h-2v9H17V18Zm11 9v7h6c2 0 4-1 4-4s-2-3-4-3h-6Z" fill="#69f0ae"/>
+  <style>
+    .surface { fill: #f3f3f1; }
+    .mark { fill: #1d1d1f; }
+    @media (prefers-color-scheme: dark) {
+      .surface { fill: #1d1d1a; }
+      .mark { fill: #f3f3ef; }
+    }
+  </style>
+  <rect class="surface" width="64" height="64" rx="15"/>
+  <path class="mark" d="M17 18h17c9 0 14 5 14 12 0 5-3 9-8 11l9 10H37l-7-9h-2v9H17V18Zm11 9v7h6c2 0 4-1 4-4s-2-3-4-3h-6Z"/>
 </svg>
