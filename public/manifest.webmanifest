@@ -1,11 +1,11 @@
 {
-  "name": "Ryan Yang — Field Notes",
+  "name": "Ryan Yang — Personal Site",
   "short_name": "Ryan Yang",
-  "description": "Independent AI product developer building small systems that help AI work land.",
+  "description": "Independent developer building focused AI products, developer tools, and experiments.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#111614",
-  "theme_color": "#111614",
+  "background_color": "#f3f3f1",
+  "theme_color": "#f3f3f1",
   "icons": [
     {
       "src": "/favicon.svg",

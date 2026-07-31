@@ -1,6 +1,6 @@
-# Ryan Yang — Field Notes
+# Ryan Yang — Personal Site
 
-Ryan Yang's interactive personal site: current work, selected projects, public activity, and an embedded command line.
+The source for [ruiy.pages.dev](https://ruiy.pages.dev): a bilingual, light-and-dark personal site for Ryan Yang's AI products, developer tools, and experiments.
 
 ## Local development
 
@@ -16,4 +16,4 @@ pnpm build
 pnpm preview
 ```
 
-The static `dist/` output is deployed to Cloudflare Pages at [ruiy.pages.dev](https://ruiy.pages.dev).
+Cloudflare Pages publishes the static `dist/` output to [ruiy.pages.dev](https://ruiy.pages.dev).
